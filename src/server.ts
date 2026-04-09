@@ -3,6 +3,8 @@ dotenv.config();
 
 import app from "./app.js";
 
-app.listen(3005,()=>{
-    console.log("3005 Port Is Running");
+const PORT = process.env.PORT || 3005;
+
+app.listen(PORT,()=>{
+    console.log("${PORT} Is Running");
 });
