@@ -1,0 +1,24 @@
+CREATE DATABSE seats_service;
+
+CREATE TABLE seats(
+    seat_id INT PRIMARY KEY AUTO_INCREMENT,
+    seat_public_id CHAR(36) NOT NULL UNIQUE,
+    showtime_public_id CHAR(36),
+    seat_status ENUM('booked','hold','available','cancelled') DEFAULT 'available',
+    is_active TINYINT NOT NULL DEFAULT 1,
+    hold_expires_at DATETIME NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE USER 'seats_app'@'localhost'
+IDENTIFIED BY '9825690996';
+
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON seats_service.*
+TO 'seats_app'@'localhost';
+
+FLUSH PRIVILEGES;
+
+SHOW GRANTS FOR 'seats_app'@'localhost';
